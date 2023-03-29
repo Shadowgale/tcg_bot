@@ -4,7 +4,6 @@ defmodule TcgBotFetch do
     URI.parse("https://api.scryfall.com/cards/named?format=image")
     |> URI.append_query(URI.encode_query(%{fuzzy: name}))
     |> URI.to_string()
-
     |> check_url()
   end
 
