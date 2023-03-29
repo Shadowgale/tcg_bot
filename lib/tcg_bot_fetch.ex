@@ -1,11 +1,11 @@
 defmodule TcgBotFetch do
   def fetch(name) do
     # IO.inspect(URI.parse("https://api.scryfall.com/cards/named?format=image&fuzzy="<>name))
-    parse = URI.parse("https://api.scryfall.com/cards/named?format=image")
-    append = URI.append_query(parse, URI.encode_query(%{fuzzy: name}))
-    url_string = URI.to_string(append)
-    IO.inspect(url_string)
-    check_url(url_string)
+    URI.parse("https://api.scryfall.com/cards/named?format=image")
+    |> URI.append_query(URI.encode_query(%{fuzzy: name}))
+    |> URI.to_string()
+
+    |> check_url()
   end
 
   defp check_url(url) do
