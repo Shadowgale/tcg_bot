@@ -2,6 +2,8 @@ import Config
 
 Dotenv.load!()
 
-config(:nostrum,
-  [{:token, System.fetch_env!("BOTKEY")}, # The token of your bot as a string
-  {:gateway_intents, :all}])
+config(
+  :nostrum,
+  # The token of your bot as a string
+  [{:token, System.fetch_env!("BOTKEY")}, {:gateway_intents, :all}]
+)

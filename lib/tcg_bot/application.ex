@@ -12,7 +12,6 @@ defmodule TcgBot.Application do
       TcgBot
       # Starts a worker by calling: TcgBot.Worker.start_link(arg)
       # {TcgBot.Worker, arg}
-
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
