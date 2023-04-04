@@ -7,6 +7,5 @@ defmodule TcgBotHelp do
       !tcg fetch random: fetches a random card and its price
       !tcg help: display bot commands
     """
-
   end
 end
