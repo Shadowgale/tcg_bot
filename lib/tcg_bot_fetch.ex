@@ -1,5 +1,4 @@
 defmodule TcgBotFetch do
-
   def fetch_price(name) do
     # Checks if the card was found on the API using the check_url/1 function, returns a tuple which contains the card image's url and its price
     parse = URI.parse("https://api.scryfall.com/cards/named")
