@@ -14,11 +14,7 @@ defmodule TcgBotConsumer do
       "!tcg help" ->
         Api.create_message(
           msg.channel_id,
-          "TCG Bot Help" <>
-            "\nCommands:" <>
-            "\n!tcg fetch name <name> : displays the named card and its price (in usd), if found on Scryfall's API" <>
-            "\n!tcg fetch random: fetches a random card and its price" <>
-            "\n!tcg help: display bot commands"
+          TcgBotHelp.help()
         )
 
       "!tcg fetch name " <> name ->

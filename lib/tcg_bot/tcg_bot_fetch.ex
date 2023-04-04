@@ -6,20 +6,22 @@ defmodule TcgBotFetch do
     url_string = URI.to_string(query)
     checked_url = check_url(url_string)
 
-    if(String.starts_with?(checked_url, "https://")) do
-      response = HTTPoison.get!(checked_url)
-      map = Jason.decode!(response.body)
-      price = map["prices"]["usd"]
-      url = map["image_uris"]["normal"]
+    case checked_url do
+      {:ok, url} ->
+        response = HTTPoison.get!(url)
+        map = Jason.decode!(response.body)
+        price = map["prices"]["usd"]
+        image_url = map["image_uris"]["normal"]
 
-      if(price != nil) do
-        price_string = "Price: $" <> price
-        {url, price_string}
-      else
-        {url, "couldn't find the price in usd"}
-      end
-    else
-      {checked_url, 0}
+        if(price != nil) do
+          price_string = "Price: $" <> price
+          {image_url, price_string}
+        else
+          {image_url, "Couldn't find the price in usd"}
+        end
+
+      {:error, details} ->
+        {details, 0}
     end
   end
 
@@ -44,9 +46,9 @@ defmodule TcgBotFetch do
 
     if response.status_code == 404 do
       %{"details" => details} = Jason.decode!(response.body)
-      details
+      {:error, details}
     else
-      url
+      {:ok, url}
     end
   end
 end
