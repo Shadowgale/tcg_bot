@@ -14,11 +14,27 @@ defmodule TcgBotConsumer do
       "!tcg help" ->
         Api.create_message(
           msg.channel_id,
-          "TCG Bot Help\nCommands:\n!tcg fetch <name> : displays the named card if found on Scryfall's API\n!tcg help: display bot commands"
+          "TCG Bot Help" <>
+            "\nCommands:" <>
+            "\n!tcg fetch name <name> : displays the named card and its price (in usd), if found on Scryfall's API" <>
+            "\n!tcg fetch random: fetches a random card and its price" <>
+            "\n!tcg help: display bot commands"
         )
 
-      "!tcg fetch " <> name ->
-        Api.create_message(msg.channel_id, TcgBotFetch.fetch(name))
+      "!tcg fetch name " <> name ->
+        {url, price} = TcgBotFetch.fetch_price(name)
+
+        if(price == 0) do
+          Api.create_message(msg.channel_id, url)
+        else
+          Api.create_message(msg.channel_id, url)
+          Api.create_message(msg.channel_id, price)
+        end
+
+      "!tcg fetch random" ->
+        {url, price} = TcgBotFetch.fetch_random()
+        Api.create_message(msg.channel_id, url)
+        Api.create_message(msg.channel_id, price)
 
       _ ->
         :ignore
