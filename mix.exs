@@ -23,7 +23,6 @@ defmodule TcgBot.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:dotenv, "~> 3.1"},
       {:httpoison, "~> 2.1"},
       {:nostrum, "~> 0.6"},
       {:jason, "~> 1.4"}

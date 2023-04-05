@@ -27,3 +27,6 @@ tcg_bot-*.tar
 
 # Environment variables.
 .env
+
+# Secrets
+/config/secret.exs
