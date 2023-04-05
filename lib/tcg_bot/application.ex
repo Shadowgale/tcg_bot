@@ -7,16 +7,14 @@ defmodule TcgBot.Application do
 
   @impl true
   def start(_type, _args) do
-    children = [
-      # {Finch, name: Finch},
-      TcgBot
-      # Starts a worker by calling: TcgBot.Worker.start_link(arg)
-      # {TcgBot.Worker, arg}
-    ]
-
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: TcgBot.Supervisor]
-    Supervisor.start_link(children, opts)
+    if Mix.env() == :test do
+      children = []
+      Supervisor.start_link(children, opts)
+    else
+      children = [TcgBot]
+      Supervisor.start_link(children, opts)
+    end
+    # Supervisor.start_link(children, opts)
   end
 end
