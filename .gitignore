@@ -30,3 +30,6 @@ tcg_bot-*.tar
 
 # Secrets
 /config/secret.exs
+
+# Old config
+/config/runtime_hidden.exs
